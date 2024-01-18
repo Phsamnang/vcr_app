@@ -6,6 +6,7 @@ import {NavBarMenu} from "@/components/navbar/NavBarMenu";
 
 const Item = () => {
     const {id} = useParams()
+
     const {data} = useFetchCategoryId(id);
 
     return <>
