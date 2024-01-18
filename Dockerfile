@@ -9,4 +9,4 @@ RUN npm install --production
 
 
 
-CMD [ "npm","run"]
+CMD [ "npm","run","dev"]
