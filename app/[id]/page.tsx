@@ -11,16 +11,20 @@ const Item = () => {
 
     return <>
         <NavBarMenu/>
-        <div className="row">
-            <div className="col-sm-6 col-md-6 col-lg-4 g-4">
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {data?.products?.map((p) => (
-                        <ItemCard data={p} key={p?.productId}/>
-                    ))}
-                </div>
+        <div>
+            <div className="col-sm-6 col-md-12 col-lg-12 g-4">
+
+                    <div className="row card-deck">
+                        {data?.products?.map((p) => (
+
+                            <ItemCard data={p} key={p?.productId}/>
+
+                        ))}
+                    </div>
 
             </div>
         </div>
+
     </>
 }
 export default Item
