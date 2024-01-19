@@ -11,7 +11,7 @@ const Item = () => {
 
     return <>
         <NavBarMenu/>
-        <div>
+        <div className="container">
             <div className="col-sm-6 col-md-12 col-lg-12 g-4">
 
                     <div className="row card-deck">
