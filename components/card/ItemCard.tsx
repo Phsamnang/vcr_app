@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {Component} from "react";
+import  classes from './ItemCard.module.css'
 
 export class ItemCard extends Component<{ data: any }> {
     render() {
@@ -11,7 +12,9 @@ export class ItemCard extends Component<{ data: any }> {
                 <div className="card-body">
                     <h5 className="card-title">{data?.productName}</h5>
                     <p className="card-text">
-                        <span>Price {data?.rielPrice}</span>
+                        <p>តម្លៃ <span className={`${classes.price} food-card_price`}> {data?.rielPrice}</span></p>
+                        <p>USD <span className={`${classes.price} food-card_price`}> {data?.UsdPrice}</span></p>
+
                     </p>
 
                 </div>
