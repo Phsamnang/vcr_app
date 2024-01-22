@@ -13,7 +13,7 @@ const ServiceId = {
      return response?.data
     }
 
-const getCategoryById=async (id:number):Promise<CategoryProduct>=>{
+const getCategoryById=async (id:any):Promise<CategoryProduct>=>{
     const response=await http.get(MessageFormat.format(ServiceId.CATEGORY_ID,id))
     return response?.data
 }

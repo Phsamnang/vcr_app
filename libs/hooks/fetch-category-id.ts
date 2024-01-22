@@ -2,7 +2,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {categoryService} from "@/service/category.service";
 
-const useFetchCategoryId= (id: number)=>{
+const useFetchCategoryId= (id: string | string[])=>{
     const query=useQuery({
         queryKey: ['category'],
         queryFn:()=>categoryService.getCategoryById(id)
