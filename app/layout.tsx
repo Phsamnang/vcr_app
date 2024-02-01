@@ -3,6 +3,7 @@ import {Inter, Poppins} from 'next/font/google'
 import './globals.css'
 import Provider from "@/components/layout/provider/Provider";
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-icons/font/bootstrap-icons.css'
 const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
     subsets: ['latin'],
