@@ -1,18 +1,9 @@
+import Link from "next/link";
 export default function NavBarProduct() {
     return <>
         <>
-            <nav className="navbar navbar-expand-lg  blur blur-rounded top-0 border-bottom z-index-3 shadow w-100 mt-4 d-none d-lg-block my-3 py-2">
+            <nav className="navbar navbar-expand-lg  blur blur-rounded border-bottom z-index-3  d-none d-lg-block shadow w-100 mt-">
                 <div className="container-fluid">
-                    <a
-                        className="navbar-brand font-weight-bolder ms-3"
-                        href=""
-                        rel="tooltip"
-                        title="Designed and Coded by Creative Tim"
-                        data-placement="bottom"
-                        target="_blank"
-                    >
-                        Soft UI Design System
-                    </a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -27,17 +18,15 @@ export default function NavBarProduct() {
                     <div className="collapse navbar-collapse" id="navigation">
                         <ul className="navbar-nav navbar-nav-hover mx-auto">
                             <li className="nav-item px-3">
-                                <a className="nav-link">Pages</a>
+                                <Link href="/stock/category" className="nav-link">Category</Link>
                             </li>
                             <li className="nav-item px-3">
-                                <a className="nav-link">Utilities</a>
+                                <Link href="/stock/product" className="nav-link">Product</Link>
                             </li>
                             <li className="nav-item px-3">
-                                <a className="nav-link">Blocks</a>
+                                <Link href="/stock/menu" className="nav-link">Menu</Link>
                             </li>
-                            <li className="nav-item px-3">
-                                <a className="nav-link">Docs</a>
-                            </li>
+
                         </ul>
                         <ul className="navbar-nav">
                             <button className="btn btn-sm  bg-gradient-dark  btn-round mb-0 me-1">
