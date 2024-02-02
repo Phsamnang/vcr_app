@@ -1,9 +1,8 @@
 import Link from "next/link";
-
+import {ReactNode} from "react";
 export const SideBar = () => {
     return <>
-        <div className="container-fluid">
-            <div className="row">
+
                 <div className="col-sm-auto bg-light sticky-top">
                     <div className="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
                         <Link
@@ -31,14 +30,14 @@ export const SideBar = () => {
                             </li>
                             <li>
                                 <Link
-                                    href="#"
+                                    href="/stock"
                                     className="nav-link py-3 px-2"
                                     title=""
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="right"
                                     data-bs-original-title="Dashboard"
                                 >
-                                    <i className="bi-speedometer2 fs-1"/>
+                                    <i className="bi bi-shop fs-1"/>
                                 </Link>
                             </li>
                             <li>
@@ -111,11 +110,8 @@ export const SideBar = () => {
                         {/*</div>*/}
                     </div>
                 </div>
-                <div className="col-sm p-3 min-vh-100">
 
-                </div>
-            </div>
-        </div>
+
 
     </>
 }

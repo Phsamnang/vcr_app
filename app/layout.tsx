@@ -4,6 +4,8 @@ import './globals.css'
 import Provider from "@/components/layout/provider/Provider";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import {SideBar} from "@/components/sidbar/SideBar";
+
 const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
     subsets: ['latin'],
@@ -30,7 +32,15 @@ export default function RootLayout({
 
         <body className={poppins.className}>
         <Provider>
-            {children}
+            <div className="container-fluid">
+                <div className="row">
+                    <SideBar/>
+                    <div className="col-sm p-3 min-vh-100">
+                        {children}
+                    </div>
+
+                </div>
+            </div>
         </Provider>
         </body>
         </html>
