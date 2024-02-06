@@ -1,131 +1,52 @@
-import React from 'react';
+'use client'
+import React, {useState} from 'react';
+import {Modal, Button} from 'react-bootstrap';
+import {categoryService} from "@/service/category.service";
 
 function ModalCategory() {
+    const [show, setShow] = useState(false);
+    const [category, setCategory] = useState("");
+
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
+
+    function createCategory() {
+        const cate = {
+            name: category
+        }
+        categoryService.createCategory(cate).then(v => {
+            if (v === 200) {
+                setCategory("");
+                handleClose()
+            }
+        }).catch(e => e);
+
+    }
     return (
-        <div>
-            <button
-                type="button"
-                className="btn btn-primary btn-lg"
-                data-toggle="modal"
-                data-target="#ModalLoginForm"
-            >
-                Launch demo modal
-            </button>
-            <>
-                {/* Modal HTML Markup */}
-                <div id="ModalLoginForm" className="modal fade">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h1 className="modal-title">Login</h1>
-                            </div>
-                            <div className="modal-body">
-                                <form role="form" method="POST" action="">
-                                    <input type="hidden" name="_token" defaultValue=""/>
-                                    <div className="form-group">
-                                        <label className="control-label">E-Mail Address</label>
-                                        <div>
-                                            <input
-                                                type="email"
-                                                className="form-control input-lg"
-                                                name="email"
-                                                defaultValue=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="control-label">Password</label>
-                                        <div>
-                                            <input
-                                                type="password"
-                                                className="form-control input-lg"
-                                                name="password"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div>
-                                            <div className="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="remember"/> Remember Me
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div>
-                                            <button type="submit" className="btn btn-success">
-                                                Login
-                                            </button>
-                                            <a className="btn btn-link" href="">
-                                                Forgot Your Password?
-                                            </a>
-                                        </div>
-                                    </div>
-                                </form>
-                                <h1>Or Signup!</h1>
-                                <form role="form" method="POST" action="">
-                                    <input type="hidden" name="_token" defaultValue=""/>
-                                    <div className="form-group">
-                                        <label className="control-label">Username</label>
-                                        <div>
-                                            <input
-                                                type="text"
-                                                className="form-control input-lg"
-                                                name="name"
-                                                defaultValue=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="control-label">E-Mail Address</label>
-                                        <div>
-                                            <input
-                                                type="email"
-                                                className="form-control input-lg"
-                                                name="email"
-                                                defaultValue=""
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="control-label">Password</label>
-                                        <div>
-                                            <input
-                                                type="password"
-                                                className="form-control input-lg"
-                                                name="password"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <label className="control-label">Confirm Password</label>
-                                        <div>
-                                            <input
-                                                type="password"
-                                                className="form-control input-lg"
-                                                name="password_confirmation"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-group">
-                                        <div>
-                                            <button type="submit" className="btn btn-success">
-                                                Register
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        {/* /.modal-content */}
-                    </div>
-                    {/* /.modal-dialog */}
-                </div>
-                {/* /.modal */}Avatar
-            </>
-
-
+        <div className="mt-2">
+            <Button variant="primary" onClick={handleShow}>
+                Create
+            </Button>
+            <Modal show={show} onHide={handleShow} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Create category
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <input onChange={e => setCategory(e.target.value)}
+                           className="form-control"
+                           type="text"
+                           id="example-text-input" value={category}
+                    />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={createCategory}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
