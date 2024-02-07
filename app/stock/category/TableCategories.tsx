@@ -1,5 +1,5 @@
 'use client'
-import {flexRender, useReactTable,} from "@tanstack/react-table";
+import {ColumnDef, flexRender, getCoreRowModel, useReactTable,} from "@tanstack/react-table";
 import useFetchAllCategories from "@/libs/hooks/fetch-all-categories";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,9 +8,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import React from "react";
+import Category from "@/libs/types/Category";
 
 export default function TableCategory() {
-    const columns = [
+    const columns: ColumnDef<Category>[] = [
         {
             header: "ID",
             accessorKey: "categoryId",
@@ -22,10 +24,12 @@ export default function TableCategory() {
             cell: (props) => <p>{props.getValue()}</p>
         }
     ]
-    const {data} = useFetchAllCategories()
+    const {data,isLoading,isError} = useFetchAllCategories()
 
-    const table = useReactTable({data, columns})
-    return <>
+    const table = useReactTable({data, columns, getCoreRowModel: getCoreRowModel()})
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>Error: {isError}</p>;
+    return <div>
         <TableContainer component={Paper}>
             <Table sx={{maxWidth: 650}} aria-label="simple table">
                 <TableHead>
@@ -45,12 +49,14 @@ export default function TableCategory() {
                 </TableHead>
                 <TableBody>
                     {
-                       table.getRowModel().rows.map((r) => (
-                            <TableRow key={r.id}>
+                        table?.getRowModel()?.rows.map(row=>(
+                            <TableRow key={row.id}>
                                 {
-                                    r.getVisibleCells().map(c => (
-                                        <TableCell key={c.id}>
-                                            {flexRender(c.column.columnDef.cell, c.getContext())}
+                                    row.getVisibleCells().map(cell=>(
+                                        <TableCell key={cell.id}>
+                                            {
+                                              flexRender(cell.column.columnDef.cell,cell.getContext())
+                                            }
                                         </TableCell>
                                     ))
                                 }
@@ -60,5 +66,5 @@ export default function TableCategory() {
                 </TableBody>
             </Table>
         </TableContainer>
-    </>
+    </div>
 }

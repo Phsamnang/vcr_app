@@ -2,26 +2,26 @@
 import React, {useState} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 import {categoryService} from "@/service/category.service";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 function ModalCategory() {
     const [show, setShow] = useState(false);
     const [category, setCategory] = useState("");
-
+  const queryClient=useQueryClient()
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    function createCategory() {
-        const cate = {
-            name: category
-        }
-        categoryService.createCategory(cate).then(v => {
-            if (v === 200) {
-                setCategory("");
-                handleClose()
-            }
-        }).catch(e => e);
 
-    }
+    const {mutate: createCategory} = useMutation(
+        {
+            mutationFn: () => categoryService.createCategory({name: category}),
+            onSuccess: () => {
+                setCategory(" ")
+                handleClose()
+                queryClient.invalidateQueries(['categories'])
+            }
+        }
+    )
     return (
         <div className="mt-2">
             <Button variant="primary" onClick={handleShow}>
