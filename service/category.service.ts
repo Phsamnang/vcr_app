@@ -6,10 +6,12 @@ import {Category} from "@/libs/types/Category";
 const ServiceId = {
     CATEGORY: '/category',
     CATEGORY_ID: '/category/{0}',
+    CATEGORIES:'/categories'
 }
 
 const getAllCategories = async (): Promise<Category[]> => {
-    const response = await http.get("/categories");
+    const response = await http.get(ServiceId.CATEGORIES);
+    console.log(" HEllo ",response.data)
     return response?.data
 }
 

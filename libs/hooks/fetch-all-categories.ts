@@ -1,4 +1,4 @@
-import {useQuery} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {categoryService} from "@/service/category.service";
 
  const useFetchAllCategories=()=>{
@@ -9,7 +9,8 @@ import {categoryService} from "@/service/category.service";
     return {
         isLoading:query?.isLoading,
         isError:query?.isError,
-        data:query?.data
+        data:query?.data,
+        error: query.error
     }
 }
 export default useFetchAllCategories
