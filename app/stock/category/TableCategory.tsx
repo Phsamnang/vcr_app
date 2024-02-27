@@ -11,7 +11,7 @@ export default function TableCategory() {
         {
             header: "ID",
             accessorKey: "categoryId",
-            cell: (props) => <p>{props.getValue()}</p>
+            cell: ({getValue}) => <p>{getValue()}</p>
         },
         {
             header: "Name",

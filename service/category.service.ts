@@ -11,7 +11,6 @@ const ServiceId = {
 
 const getAllCategories = async (): Promise<Category[]> => {
     const response = await http.get(ServiceId.CATEGORIES);
-    console.log(" HEllo ",response.data)
     return response?.data
 }
 
