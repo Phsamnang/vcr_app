@@ -6,7 +6,8 @@ import React from "react";
 import {Product} from "@/libs/types/Product";
 import useFetchProducts from "@/libs/hooks/fetch-all-products";
 import TableComponent from "@/components/table/TableComponent";
-import ModalStock from "@/app/stock/product/ModalStock";
+import ModalStock from "@/app/stock/product/ModalPrice";
+import {log} from "node:util";
 
 export default function TableProducts(){
     const columns: ColumnDef<Product>[] = [
@@ -28,6 +29,20 @@ export default function TableProducts(){
             </>
         },
         {
+            header: "Riel Price",
+            accessorKey: "rielPrice",
+            cell: (props) => <>
+                {props.getValue()}
+            </>
+        },
+        {
+            header: "USD Price",
+            accessorKey: "usdPrice",
+            cell: (props) => <>
+                {props.getValue()}
+            </>
+        },
+        {
             header: "Stock Quantity",
             accessorKey: "stockQty",
             cell: (props) => <>
@@ -35,10 +50,10 @@ export default function TableProducts(){
             </>
         },
         {
-            header: "Add Stock",
+            header: "Add Price",
             accessorKey: "productId",
             cell: (props) => <>
-                <ModalStock productId={props.getValue()}/>
+                <ModalStock productId={props.getValue()} productName={props.row.original.productName}/>
             </>
         }
     ]

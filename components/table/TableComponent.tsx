@@ -31,7 +31,7 @@ export default function TableComponent({data, columns}: PropsData) {
 
     return <div>
         <TableContainer component={Paper}>
-            <Table sx={{maxWidth: 650}} aria-label="simple table">
+            <Table  aria-label="simple table">
                 <TableHead>
                     {
                         table.getHeaderGroups().map(hg => (

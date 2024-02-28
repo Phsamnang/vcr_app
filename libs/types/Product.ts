@@ -3,4 +3,6 @@ export interface Product{
     productName:string,
     categoryName:string,
     stockAty:number
+    rielPrice:number,
+    usdPrice:number
 }

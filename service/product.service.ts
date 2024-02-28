@@ -3,7 +3,7 @@ import {http} from "@/utils/http";
 const ServiceId = {
     PRODUCT: '/product',
     PRODUCTS:'/products',
-    STOCK:'/stock'
+    PRICE:'/product/price'
 }
 
 const createProduct=async (requestBody:any)=>{
@@ -15,12 +15,12 @@ const getAllProducts=async ()=>{
     return res.data;
 }
 
-const addStock  =async(requestBody:any)=>{
-    const res=await http.post(ServiceId.STOCK,requestBody);
+const addPrice  =async(requestBody:any)=>{
+    const res=await http.put(ServiceId.PRICE,requestBody);
     return res.status;
 }
 export const productService={
     createProduct,
     getAllProducts,
-    addStock
+    addPrice
 }
