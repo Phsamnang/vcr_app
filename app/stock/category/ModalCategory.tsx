@@ -25,7 +25,7 @@ function ModalCategory() {
     return (
         <div className="mt-2">
             <Button variant="primary" onClick={handleShow}>
-                Create
+                Create Category
             </Button>
             <Modal show={show} onHide={handleShow} centered>
                 <Modal.Header closeButton>

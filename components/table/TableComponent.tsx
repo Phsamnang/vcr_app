@@ -24,7 +24,7 @@ export default function TableComponent({data, columns}: PropsData) {
         , debugTable: true,
         initialState: {
             pagination: {
-                pageSize: 2
+                pageSize: 5
             }
         }
     })

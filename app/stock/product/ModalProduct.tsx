@@ -34,6 +34,7 @@ function ModalProduct() {
             onSuccess: () => {
                 //alert("Create product successfully!")
                 handleClose()
+                queryClient.invalidateQueries({queryKey:['products']})
             }
         }
     )
