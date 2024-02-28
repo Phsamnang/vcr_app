@@ -1,5 +1,6 @@
 export interface Product{
     productId:number,
     productName:string,
-    categoryName:string
+    categoryName:string,
+    stockAty:number
 }

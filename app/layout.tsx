@@ -24,12 +24,10 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
 
-
     return (
         <html lang="en">
         <head>
-            <title>VCR Menu</title>
-
+            <title>Untitle</title>
         </head>
 
         <body className={poppins.className}>

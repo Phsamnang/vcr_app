@@ -1,7 +1,7 @@
 import Link from "next/link";
 export default function NavBarProduct() {
     return <>
-        <>
+
             <nav className="navbar navbar-expand-lg  blur blur-rounded border-bottom z-index-3  d-none d-lg-block shadow w-100 mt-">
                 <div className="container-fluid">
                     <button
@@ -36,7 +36,7 @@ export default function NavBarProduct() {
                     </div>
                 </div>
             </nav>
-        </>
+
 
 
     </>

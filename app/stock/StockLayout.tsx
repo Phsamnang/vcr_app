@@ -1,14 +1,18 @@
-'use client'
-import {ReactNode, useEffect} from "react";
+
+import React, {ReactNode, useEffect} from "react";
 import NavBarProduct from "@/components/navbar/NavBarProduct";
 
 interface Props{
-    children:ReactNode|ReactNode[]
+    children:ReactNode|ReactNode[],
+    title:string
 }
-export default function StockLayout({children}:Props){
+export default function StockLayout({children,title}:Props){
 
     return <>
-    <NavBarProduct/>
+        <head>
+            <title>{title}</title>
+        </head>
+        <NavBarProduct/>
         {children}
     </>
 }

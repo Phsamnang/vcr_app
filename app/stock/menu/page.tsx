@@ -4,7 +4,7 @@ import ModalProduct from "@/app/stock/product/ModalProduct";
 
 export default function Home(){
     return<>
-        <StockLayout>
+        <StockLayout title="Menu">
 
         </StockLayout>
     </>
