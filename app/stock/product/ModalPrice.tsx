@@ -1,27 +1,27 @@
 'use client'
 import React, {useState} from 'react';
-import {Modal, Button} from 'react-bootstrap';
-import {categoryService} from "@/service/category.service";
+import {Button, Modal} from 'react-bootstrap';
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {productService} from "@/service/product.service";
 
-interface Props{
-    productId:number,
-    productName:string
+interface Props {
+    productId: number,
+    productName: string
 }
-function ModalPrice({productId,productName}:Props) {
+
+function ModalPrice({productId, productName}: Props) {
     const [show, setShow] = useState(false);
     const [price, setPrice] = useState<number>();
     const [currency, setCurrency] = useState<number>(0);
-  const queryClient=useQueryClient()
+    const queryClient = useQueryClient()
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    console.log(" price",currency)
+    console.log(" price", currency)
 
     const {mutate: addStock} = useMutation(
         {
-            mutationFn: () => productService.addPrice({productId:productId,amount:price,currency:currency}),
+            mutationFn: () => productService.addPrice({productId: productId, amount: price, currency: currency}),
             onSuccess: () => {
                 handleClose()
                 queryClient.invalidateQueries(['products'])
@@ -34,7 +34,7 @@ function ModalPrice({productId,productName}:Props) {
                 Add
             </Button>
             <Modal show={show} onHide={handleShow} centered>
-                <Modal.Header >
+                <Modal.Header>
                     <Modal.Title>
                         {productName}
                     </Modal.Title>
@@ -45,9 +45,8 @@ function ModalPrice({productId,productName}:Props) {
                             Select Category
                         </label>
                         <select name="categoryId" className="form-select" aria-label="Default select example"
-                                onChange={e=>setCurrency(e.target.value)}>
+                                onChange={e => setCurrency(e.target.value)}>
                             <option selected>Select Currency</option>
-
                             // eslint-disable-next-line react/jsx-key
                             <option value="USD">USD</option>
                             <option value="RIEL">RIEL</option>

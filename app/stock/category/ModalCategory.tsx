@@ -7,7 +7,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 function ModalCategory() {
     const [show, setShow] = useState(false);
     const [category, setCategory] = useState("");
-  const queryClient=useQueryClient()
+    const queryClient = useQueryClient()
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 

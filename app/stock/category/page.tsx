@@ -13,7 +13,6 @@ import TableCategory from "@/app/stock/category/TableCategory";
 export default function Home(){
 
     return<>
-
         <StockLayout title="Category">
          <ModalCategory/>
           <TableCategory/>

@@ -6,6 +6,7 @@ const useFetchProducts = () => {
         queryKey: ['products'],
         queryFn: productService.getAllProducts
     })
+
     return {
         isLoading: query.isLoading,
         isError: query.isError,
