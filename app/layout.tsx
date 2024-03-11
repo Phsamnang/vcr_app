@@ -38,7 +38,7 @@ export default function RootLayout({
             <Provider>
                 <div className="container-fluid">
                     <div className="row">
-                        <SideBar/>
+                        {/* <SideBar/> */}
                         <div className="col-sm p-3 min-vh-100">
                             {children}
                         </div>

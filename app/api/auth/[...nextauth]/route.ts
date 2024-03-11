@@ -4,6 +4,9 @@ import {authService} from "@/service/auth.service";
 
 const authOption: NextAuthOptions = ({
     secret: process.env.NEXTAUTH_SECRET,
+    session:{
+        strategy:'jwt'
+    },
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -16,7 +19,11 @@ const authOption: NextAuthOptions = ({
                 email: {label: "email", type: "text", placeholder: "example@gmail.com"},
                 password: {label: "Password", type: "password"}
             },
-            async authorize(credentials, req) {
+            async authorize(credentials) {
+
+
+                console.log(credentials);
+                
                 // You need to provide your own logic here that takes the credentials
                 // submitted and returns either a object representing a user or value
                 // that is false/null if the credentials are invalid.
@@ -25,20 +32,22 @@ const authOption: NextAuthOptions = ({
                 // (i.e., the request IP address)
                 const res = await authService.login(credentials).catch(err => err)
 
-
                 // If no error and we have user data, return it
                 if (res.status == 200) {
+                    console.log(res.data);
+                    
                     return res?.data
                 }
+
+
                 // Return null if user data could not be retrieved
                 return null
             }
         })
     ],
-    pages: {
-        signIn: '/auth/signin'
-    }
+   
 });
-const handler = NextAuth(authOption)
 
-export { handler as GET, handler as POST }
+const handler = NextAuth(authOption)
+  
+  export { handler as GET, handler as POST }
