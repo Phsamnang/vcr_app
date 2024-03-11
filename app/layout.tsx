@@ -5,6 +5,7 @@ import Provider from "@/components/layout/provider/Provider";
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import {SideBar} from "@/components/sidbar/SideBar";
+import NextAuthProvider from "@/components/layout/provider/NextAuthProvider";
 
 
 const inter = Inter({subsets: ['latin']})
@@ -31,16 +32,20 @@ export default function RootLayout({
         </head>
 
         <body className={poppins.className}>
-        <Provider>
-            <div className="container-fluid">
-                <div className="row">
-                    <SideBar/>
-                    <div className="col-sm p-3 min-vh-100">
-                        {children}
+        <NextAuthProvider>
+
+
+            <Provider>
+                <div className="container-fluid">
+                    <div className="row">
+                        <SideBar/>
+                        <div className="col-sm p-3 min-vh-100">
+                            {children}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Provider>
+            </Provider>
+        </NextAuthProvider>
         </body>
         </html>
     )
