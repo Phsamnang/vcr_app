@@ -21,7 +21,6 @@ const authOption: NextAuthOptions = ({
             },
             async authorize(credentials) {
 
-
                 console.log(credentials);
                 
                 // You need to provide your own logic here that takes the credentials
@@ -31,12 +30,11 @@ const authOption: NextAuthOptions = ({
                 // You can also use the `req` object to obtain additional parameters
                 // (i.e., the request IP address)
                 const res = await authService.login(credentials).catch(err => err)
-
+              console.log(res.data)
                 // If no error and we have user data, return it
                 if (res.status == 200) {
                     console.log(res.data);
-                    
-                    return res?.data
+                    return res?.data.data
                 }
 
 
@@ -45,6 +43,17 @@ const authOption: NextAuthOptions = ({
             }
         })
     ],
+    callbacks:{
+        async jwt({token,user}){
+         return {...token,...user}
+        },
+        async session({ session, token, user }) {
+            // Send properties to the client, like an access_token and user id from a provider.
+            session.user=token
+
+            return session
+        }
+    }
    
 });
 

@@ -12,7 +12,7 @@ const createProduct=async (requestBody:any)=>{
 }
 const getAllProducts=async ()=>{
     const res=await http.get(ServiceId.PRODUCTS);
-    return res.data;
+    return res.data.data;
 }
 
 const addPrice  =async(requestBody:any)=>{

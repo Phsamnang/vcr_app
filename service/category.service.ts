@@ -11,16 +11,16 @@ const ServiceId = {
 
 const getAllCategories = async (): Promise<Category[]> => {
     const response = await http.get(ServiceId.CATEGORIES);
-    return response?.data
+    return response?.data?.data
 }
 
 const getCategoryById = async (id: any): Promise<CategoryProduct> => {
     const response = await http.get(MessageFormat.format(ServiceId.CATEGORY_ID, id))
-    return response?.data
+    return response?.data?.data
 }
 const createCategory = async (requestBody: any) => {
     const res= await http.post(ServiceId.CATEGORY, requestBody);
-    //console.log("service response ",res.status)
+    console.log("service response ",res.status)
     return res.status
 }
 export const categoryService = {
