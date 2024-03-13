@@ -24,13 +24,12 @@ export default function Home() {
         //useClient.invalidateQueries({queryKey: ["stocks"]})
     }, [selectedDate]);
 
-
     const queryKey = ["stocks", date];
     const {data, isLoading} = useQuery({
             queryKey,
             queryFn: async () => {
                 const re = await http.get("import?date=" + date);
-                return re?.data
+                return re?.data.data
             }
 
         }

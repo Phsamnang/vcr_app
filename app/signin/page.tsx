@@ -2,6 +2,7 @@
 import React from 'react'
 import {useForm} from "react-hook-form";
 import {signIn} from "next-auth/react";
+import classes from './signin.module.css'
 
 export default function page() {
     const {setValue, getValues, register, handleSubmit} = useForm();
@@ -23,7 +24,8 @@ export default function page() {
                     <div className="col-md-6 offset-md-3">
                         <h2 className="text-center text-dark mt-5">ចូលកម្មវិធី</h2>
                         <div className="card my-5">
-                            <form className="card-body cardbody-color p-lg-5" onSubmit={handleSubmit(onSubmit)}>
+                            <form className={`${classes.btnColor} card-body  p-lg-5 `}
+                                  onSubmit={handleSubmit(onSubmit)}>
                                 <div className="text-center">
                                     <img
                                         src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png"
@@ -56,7 +58,7 @@ export default function page() {
                                     />
                                 </div>
                                 <div className="text-center">
-                                    <button type="submit" className="btn btn-color px-5 mb-5 w-100">
+                                    <button type="submit" className={`btn ${classes.btnColor} px-5 mb-5 w-100`}>
                                         Login
                                     </button>
                                 </div>

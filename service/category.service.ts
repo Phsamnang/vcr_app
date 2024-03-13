@@ -1,7 +1,7 @@
 import {CategoryProduct} from "@/libs/types/CategoryProduct";
 import {http} from "@/utils/http";
 import {MessageFormat} from "@/utils/message-format";
-import {Category} from "@/libs/types/Category";
+import Category from "@/libs/types/Category";
 
 const ServiceId = {
     CATEGORY: '/category',

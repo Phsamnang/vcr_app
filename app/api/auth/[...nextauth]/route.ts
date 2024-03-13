@@ -50,11 +50,12 @@ const authOption: NextAuthOptions = ({
         async session({ session, token, user }) {
             // Send properties to the client, like an access_token and user id from a provider.
             session.user=token
-
             return session
         }
+    },
+    pages:{
+        signIn:'/signin'
     }
-   
 });
 
 const handler = NextAuth(authOption)

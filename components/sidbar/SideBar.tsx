@@ -47,7 +47,7 @@ export const SideBar = () => {
                     </li>
                     <li>
                         <Link
-                            href="#"
+                            href="attendance"
                             className="nav-link py-3 px-2"
                             title=""
                             data-bs-toggle="tooltip"
@@ -59,7 +59,7 @@ export const SideBar = () => {
                     </li>
                     <li>
                         <Link
-                            href="#"
+                            href="/employee"
                             className="nav-link py-3 px-2"
                             title=""
                             data-bs-toggle="tooltip"
