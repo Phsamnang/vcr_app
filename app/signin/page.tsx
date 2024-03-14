@@ -1,12 +1,26 @@
 'use client'
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useForm} from "react-hook-form";
-import {signIn} from "next-auth/react";
+import {getSession, signIn} from "next-auth/react";
 import classes from './signin.module.css'
+import {useRouter} from "next/navigation";
 
 export default function page() {
     const {setValue, getValues, register, handleSubmit} = useForm();
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const router = useRouter();
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        const checkSession = async () => {
+            const session = await getSession();
+            if (session) {
+                router.push('/'); // Redirect to protected page
+            }
+        };
+
+        checkSession();
+    }, [router]);
     const onSubmit = async () => {
         const result = await signIn("credentials", {
             email: getValues("username"),

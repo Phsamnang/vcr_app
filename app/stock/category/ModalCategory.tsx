@@ -11,7 +11,6 @@ function ModalCategory() {
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-
     const {mutate: createCategory} = useMutation(
         {
             mutationFn: () => categoryService.createCategory({name: category}),

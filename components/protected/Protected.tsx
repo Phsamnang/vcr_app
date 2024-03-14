@@ -12,6 +12,8 @@ function Protected({ children }:PropsWithChildren) {
         router.push('/signin') ;
     }
 
+
+
     return children; // Render protected content if user is authenticated
 }
 export default Protected;
