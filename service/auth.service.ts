@@ -5,6 +5,7 @@ const ServiceId={
 }
 
 const login = (data: any) => {
+    console.log("hgelllo hunii")
     return http.post(ServiceId.LOGIN, data)
 }
 

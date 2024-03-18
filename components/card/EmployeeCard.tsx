@@ -6,6 +6,7 @@ import moment from 'moment';
 import useFetchInfoById from "@/libs/hooks/fetch-info-by-id";
 import {useEffect, useState} from "react";
 import {width} from "dom-helpers";
+import ShowDetail from "@/app/attendance/ShowDetail";
 
 const EmployeeCard = ({emp}: any) => {
     const queryCLient = useQueryClient()
@@ -18,13 +19,15 @@ const EmployeeCard = ({emp}: any) => {
         },
     })
     const {data} = useFetchInfoById(emp.id)
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true)
     return <div className="col-md-3">
+        <ShowDetail isShow={show} setIsShow={setShow}/>
         <div className="m-2">
             <div className="card" style={{width: "18rem"}}>
                 <div className={`${classes.panel} text-center`}>
-
-                    <div className="card-body">
+                    <div className="card-body" onClick={handleShow}>
                         <div className="view overlay">
                             <img
                                 alt="Avatar"
@@ -39,12 +42,13 @@ const EmployeeCard = ({emp}: any) => {
                         <p>ម៉ោងចូល:<span
                             className={`${data ? 'text-success' : 'text-danger'}`}> {data ? moment(data?.checkin, 'HH:mm:ss').format('h:mm A') : 'មិនទាន់មកទេ'}</span>
                         </p>
-                        <div className={classes.padBtm}>
-                            <button className={`btn ${data ? 'btn-success' : 'btn-primary'} m-2`}
-                                    onClick={() => checkIn()}
-                                    disabled={data}>{data ? 'បានមក' : 'មក'}</button>
-                            <button className="btn btn-danger">អត់មក</button>
-                        </div>
+
+                    </div>
+                    <div className={classes.padBtm}>
+                        <button className={`btn ${data ? 'btn-success' : 'btn-primary'} m-2`}
+                                onClick={() => checkIn()}
+                                disabled={data}>{data ? 'បានមក' : 'មក'}</button>
+                        <button className="btn btn-danger">អត់មក</button>
                     </div>
                 </div>
             </div>

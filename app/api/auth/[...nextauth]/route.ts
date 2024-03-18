@@ -37,7 +37,6 @@ const authOption: NextAuthOptions = ({
                     return res?.data.data
                 }
 
-
                 // Return null if user data could not be retrieved
                 return null
             }
