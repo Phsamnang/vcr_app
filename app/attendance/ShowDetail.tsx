@@ -2,7 +2,7 @@ import {Button, Modal} from "react-bootstrap";
 import React, {useState} from "react";
 
 const ShowDetail = ({isShow,setIsShow}) => {
-    console.log("pop up commponent",isShow)
+
  const handleClose=()=>{
      setIsShow(false)
  }

@@ -2,10 +2,15 @@
 import useFetchEmployee from "@/libs/hooks/fetch-all-employee";
 import {ColumnDef} from "@tanstack/react-table";
 import Category from "@/libs/types/Category";
-import React from "react";
+import React, {useEffect} from "react";
 import TableComponent from "@/components/table/TableComponent";
 
 function Home() {
+    useEffect(() => {
+        const mp3 = new Audio('asset/sound.mp3')
+        console.log("audio.......")
+        mp3.play()
+    }, []);
     const {data,isLoading} = useFetchEmployee()
     const columns: ColumnDef<Category>[] = [
         {
