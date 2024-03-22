@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {PlusOutlined} from '@ant-design/icons';
 import {
     Button,
@@ -15,8 +15,9 @@ import {
     Upload
 } from 'antd';
 import useFetchAllCategories from "@/libs/hooks/fetch-all-categories";
-
-
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {menuService} from "@/service/menu.service";
+import {useRouter} from "next/navigation";
 
 
 type SizeType = Parameters<typeof Form>[0]['size'];
@@ -34,13 +35,27 @@ const FormMenu = () => {
         setComponentSize(size);
     };
     const [size, setSize] = useState<SizeType>('large')
-const [form]=Form.useForm()
-    const onFinish = (values:any) => {
-        console.log('Form values:', values);
-
-     form.resetFields()
-        // Here you have access to all input values
+    const [form] = Form.useForm()
+    const route=useRouter()
+    const {mutate: createMenu} = useMutation({
+        mutationFn: (d: any) => menuService.createMenu(d),
+        onSuccess: () => {
+            useClient.invalidateQueries({queryKey:['menus']})
+            form.resetFields()
+        }
+    })
+    useEffect(() => {
+        route.push("?cate_id="+'1')
+    }, []);
+    const onFinish = (values: any) => {
+     createMenu(values)
+        alert(`បង្កើតមីនុយថ្មីឈ្មោះ ${values.name} ជោគជ័យ `)
     };
+    const useClient=useQueryClient()
+    const handleParam=(p:string)=>{
+        route.push("?cate_id="+p)
+        useClient.invalidateQueries({queryKey:['menus']})
+    }
     return (
         <div>
             <Form onFinish={onFinish} form={form}
@@ -51,14 +66,15 @@ const [form]=Form.useForm()
                   size={componentSize as SizeType}
                 // style={{maxWidth: 600}}
             >
-                <Form.Item label="Select" name="categoryId">
+                <Form.Item label="ជ្រើសរើស:" name="categoryId">
                     <Select defaultValue="Select Category"
-                        options={
+                            onChange={(e)=>handleParam(e)}
+                            options={
 
-                            data?.map(i => (
-                                {value: i.categoryId, label: i.categoryName}
-                            ))
-                        }
+                                data?.map(i => (
+                                    {value: i.categoryId, label: i.categoryName}
+                                ))
+                            }
 
                     />
                 </Form.Item>
@@ -70,7 +86,7 @@ const [form]=Form.useForm()
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" size={size}>
-                        Primary
+                        បញ្ចូល
                     </Button>
                 </Form.Item>
 

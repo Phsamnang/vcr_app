@@ -1,25 +1,39 @@
-import Image from "next/image";
+
 import {Component} from "react";
-import  classes from './ItemCard.module.css'
+import classes from './ItemCard.module.css'
+import {EditOutlined, EllipsisOutlined, SettingOutlined} from '@ant-design/icons';
+import {Avatar, Card} from 'antd';
+import { Image } from 'antd';
+const {Meta} = Card;
 
 export class ItemCard extends Component<{ data: any }> {
     render() {
         let {data} = this.props;
 
         return <>
-            <div className="card col" style={{maxWidth: 180}}>
-                <Image src={data?.image} className="card-img-top" width={180} height={140} alt="food"/>
-                <div className="card-body">
-                    <h5 className="card-title">{data?.productName}</h5>
-                    <p className="card-text">
-                        <p>តម្លៃ <span className={`${classes.price} food-card_price`}> {data?.rielPrice}</span></p>
-                        <p>USD <span className={`${classes.price} food-card_price`}> {data?.UsdPrice}</span></p>
+            <Card
+                style={{width: 200}}
+                cover={
+                    <Image
+                        width={200}
+                        height={150}
+                        src={data.image}
+                    />
+                }
+                actions={[
+                    <SettingOutlined key="setting"/>,
+                    <EditOutlined key="edit"/>,
+                    <EllipsisOutlined key="ellipsis"/>,
+                ]}
+            >
+                <Meta
+                    title={data.name}
 
-                    </p>
-
-                </div>
-            </div>
-
+                />
+                <Meta
+                    title={`តម្លៃ ${data.rielPrice}`}
+                />
+            </Card>
         </>
 
     }

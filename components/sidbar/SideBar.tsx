@@ -11,7 +11,7 @@ export const SideBar = () => {
         <div className="col-sm-auto bg-light sticky-top">
             <div className="d-flex flex-sm-column flex-row flex-nowrap bg-light align-items-center sticky-top">
                 <Link
-                    href="/"
+                    href="/order"
                     className="d-block p-3 link-dark text-decoration-none"
                     title=""
                     data-bs-toggle="tooltip"
@@ -47,7 +47,7 @@ export const SideBar = () => {
                     </li>
                     <li>
                         <Link
-                            href="attendance"
+                            href="/attendance"
                             className="nav-link py-3 px-2"
                             title=""
                             data-bs-toggle="tooltip"

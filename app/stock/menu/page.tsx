@@ -4,6 +4,7 @@ import StockLayout from "@/app/stock/StockLayout";
 import ModalProduct from "@/app/stock/product/ModalProduct";
 import FormMenu from "@/app/stock/menu/FormMenu";
 import TableProducts from "@/app/stock/product/TableProducts";
+import MenuTable from "@/app/stock/menu/MenuTable";
 
 export default function Home() {
     return <>
@@ -13,12 +14,9 @@ export default function Home() {
                     <FormMenu/>
                 </div>
                 <div className="col-sm-8">
-                    <TableProducts/>
+                    <MenuTable/>
                 </div>
-
-
             </div>
-
 
         </StockLayout>
     </>

@@ -1,4 +1,4 @@
-
+"use client"
 import React, {ReactNode, useEffect} from "react";
 import NavBarProduct from "@/components/navbar/NavBarProduct";
 
