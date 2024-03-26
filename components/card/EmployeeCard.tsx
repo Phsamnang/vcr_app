@@ -7,6 +7,7 @@ import useFetchInfoById from "@/libs/hooks/fetch-info-by-id";
 import {useEffect, useState} from "react";
 import {width} from "dom-helpers";
 import ShowDetail from "@/app/attendance/ShowDetail";
+import {Image} from "antd";
 
 const EmployeeCard = ({emp}: any) => {
     const queryCLient = useQueryClient()
@@ -29,12 +30,12 @@ const EmployeeCard = ({emp}: any) => {
                 <div className={`${classes.panel} text-center`}>
                     <div className="card-body" onClick={handleShow}>
                         <div className="view overlay">
-                            <img
+                            <Image
                                 alt="Avatar"
                                 className="card-img-top"
                                 src={emp.image}
-                                width="120"
-                                height="155"
+                               width={200}
+                                height={200}
                             />
                         </div>
 

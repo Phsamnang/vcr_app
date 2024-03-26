@@ -17,7 +17,7 @@ const Table = ({data}: any) => {
                             width: '20%',
                             textAlign: 'center',
                             background: t.status == 'available' ? '#d9f7be' : t.status == 'unavailable' ? '#ff7875' : '#ffe7ba'
-                        }}>{t.name}</Card.Grid>
+                        }} onClick={()=>alert(`តើអ្នកជ្រើសរើសតុ ${t.name} មែនទេ?`)}>{t.name}</Card.Grid>
                     ))
                 }
 
