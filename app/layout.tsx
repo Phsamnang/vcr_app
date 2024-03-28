@@ -7,7 +7,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import {SideBar} from "@/components/sidbar/SideBar";
 import NextAuthProvider from "@/components/layout/provider/NextAuthProvider";
 import Protected from "@/components/protected/Protected";
-
+import '@fortawesome/fontawesome-svg-core/styles.css';
 
 const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
@@ -29,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="en">
         <head>
-            <title>ចូលកម្មវិធី  </title>
+            <title>ចូលកម្មវិធី </title>
         </head>
 
         <body className={poppins.className}>

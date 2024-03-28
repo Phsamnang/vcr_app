@@ -1,8 +1,8 @@
 "use client"
 import EmployeeCard from "@/components/card/EmployeeCard";
 import useFetchEmployee from "@/libs/hooks/fetch-all-employee";
-import {useEffect} from "react";
-import {Howl} from 'howler'
+import React from "react";
+
 export default function Home() {
 
     const {data, isLoading} = useFetchEmployee()

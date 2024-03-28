@@ -1,19 +1,38 @@
 'use client'
-import useFetchCategoryId from "@/libs/hooks/fetch-category-id";
 import {useParams} from "next/navigation";
-import {ItemCard} from "@/components/card/ItemCard";
 import {NavBarMenu} from "@/components/navbar/NavBarMenu";
-import useFetchMenus from "@/libs/hooks/fetch-all-menus";
 import Table from "@/components/card/Table";
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {tableService} from "@/service/table.service";
+import {useEffect, useState} from "react";
+import {saleService} from "@/service/sale.service";
+import {Button} from "antd";
+import {UsergroupAddOutlined} from "@ant-design/icons";
+import OrderDetials from "@/app/order/OrderDetials";
 
 const Item = () => {
     const {id} = useParams()
-
+    const [tableId, setTableId] = useState();
+    const useClient = useQueryClient()
     const {data, isLoading} = useQuery({
         queryFn: () => tableService.getTable(),
         queryKey: ['table']
+    })
+    const query = useMutation({
+        mutationFn: () => saleService.getOrderByTable(tableId)
+    })
+    useEffect(() => {
+        query.mutate()
+    }, [tableId]);
+    const {mutate: createOrder} = useMutation({
+        mutationFn: () => saleService.createSale(tableId),
+        onSuccess: () => {
+            useClient.invalidateQueries({
+                queryKey: ['table']
+            });
+            query.mutate()
+        }
+
     })
     if (isLoading) return <span>សូមរងចាំ...</span>
     return <>
@@ -21,9 +40,21 @@ const Item = () => {
         <div className="container">
             <div className="row">
                 <div className="col-sm-4">
-                    <Table data={data}/>
-                </div>
+                    <Table data={data} setTable={setTableId}/>
+                    {
+                        query.data ? <OrderDetials order={query.data.orders}/>:""
+                    }
 
+                </div>
+                <div className="col-sm-8">
+                    {tableId == undefined ? "" :
+                        query.data ? <NavBarMenu/> :
+                            <Button className="align-middle" type="primary"
+                                    onClick={() => createOrder()}><UsergroupAddOutlined/>ភ្ញៀវថ្មី</Button>
+
+                    }
+
+                </div>
             </div>
 
             {/*   {

@@ -8,9 +8,15 @@ export const NavBarMenu = () => {
     return <>
         <ul className="nav nav-tabs">
             {
-               allCategories.data?.map((c)=> (
+                allCategories.data?.map((c) => (
                     <li className="nav-item" key={c.categoryId}>
-                        <Link className="nav-link active" aria-current="page" href={`/${c.categoryId}`} >{c.categoryName}</Link>
+                        <a className="nav-link" aria-current="page">
+                            {
+                                c.categoryName
+                            }
+                        </a>
+
+                        {/*<Link className="nav-link active" aria-current="page" href={`/${c.categoryId}`} >{c.categoryName}</Link>*/}
                     </li>
 
                 ))
