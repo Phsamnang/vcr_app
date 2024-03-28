@@ -4,10 +4,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 
-const OrderDetials = ({order}:any) => {
+const OrderDetials = ({data}: any) => {
     return (
         <div>
-             <table className="table table-borderless mb-0">
+            {/*  <table className="table table-borderless mb-0">
                 <thead>
                 <tr>
 
@@ -21,7 +21,7 @@ const OrderDetials = ({order}:any) => {
                 </thead>
                 <tbody>
                 {
-                    order.map((item:any)=> (
+                    data?.orders.map((item:any)=> (
                         // eslint-disable-next-line react/jsx-key
                         <tr>
                             <td>{item.item}</td>
@@ -44,7 +44,7 @@ const OrderDetials = ({order}:any) => {
                 <div className="order-calculations">
                     <div className="d-flex justify-content-between mb-2">
                         <span className="w-px-100">Subtotal:</span>
-                        <span className="text-heading">$6398</span>
+                        <span className="text-heading">{data.totalAmount}</span>
                     </div>
                     <div className="d-flex justify-content-between mb-2">
                         <span className="w-px-100">Discount:</span>
@@ -59,8 +59,11 @@ const OrderDetials = ({order}:any) => {
                         <h6 className="mb-0">$6450</h6>
                     </div>
                 </div>
-            </div>
-
+            </div>*/}
+            <div className="float-right text-right">
+            <h4>Subtotal:</h4>
+            <h1>$99.00</h1>
+        </div>
         </div>
     );
 };

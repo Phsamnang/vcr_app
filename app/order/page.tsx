@@ -42,7 +42,7 @@ const Item = () => {
                 <div className="col-sm-4">
                     <Table data={data} setTable={setTableId}/>
                     {
-                        query.data ? <OrderDetials order={query.data.orders}/>:""
+                        query.data ? <OrderDetials data={query.data}/>:""
                     }
 
                 </div>
