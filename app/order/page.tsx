@@ -39,14 +39,14 @@ const Item = () => {
 
         <div className="container">
             <div className="row">
-                <div className="col-sm-4">
+                <div className="col-sm-5">
                     <Table data={data} setTable={setTableId}/>
                     {
                         query.data ? <OrderDetials data={query.data}/>:""
                     }
 
                 </div>
-                <div className="col-sm-8">
+                <div className="col-sm-7">
                     {tableId == undefined ? "" :
                         query.data ? <NavBarMenu/> :
                             <Button className="align-middle" type="primary"

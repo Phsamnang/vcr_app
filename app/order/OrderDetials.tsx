@@ -3,10 +3,14 @@ import React from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {Noto_Sans_Khmer} from '@next/font/google';
+import {UtilCurrency} from "@/utils/UtilCurency";
+
+const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 
 const OrderDetials = ({data}: any) => {
     return (
-        <div>
+        <div className={notoSansKhmer.className}>
             {/*  <table className="table table-borderless mb-0">
                 <thead>
                 <tr>
@@ -60,10 +64,66 @@ const OrderDetials = ({data}: any) => {
                     </div>
                 </div>
             </div>*/}
-            <div className="float-right text-right">
-            <h4>Subtotal:</h4>
-            <h1>$99.00</h1>
-        </div>
+            <div className="row">
+                <div className="col-md-12">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">
+                            <h5 className="panel-title">
+                                <strong>តុ {data?.tableName}</strong>
+                            </h5>
+                        </div>
+                        <div className="panel-body">
+                            <div className="table-responsive">
+                                <table className="table table-condensed">
+                                    <thead>
+                                    <tr>
+                                        < th scope="col">ឈ្មោះ</th>
+                                        <th scope="col">តម្លៃ</th>
+                                        <th scope="col">ចំនួន</th>
+                                        <th scope="col">សរុប</th>
+                                        <th scope="col">STATUS</th>
+                                        <th scope="col">ACTION</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {/* foreach ($order->lineItems as $line) or some such thing here */}
+                                    {
+                                        data?.orders.map((item: any) => (
+                                            // eslint-disable-next-line react/jsx-key
+                                            <tr>
+                                                <td>{item.item}</td>
+                                                <td>{UtilCurrency.RielCurrency(item.price)}</td>
+                                                <td>{item.QTY}</td>
+                                                <td>{UtilCurrency.RielCurrency(item.amount)}</td>
+                                                <td>{item.status}</td>
+                                                <td>
+                                                    <button type="button" className="btn btn-danger btn-sm px-3">
+                                                        <FontAwesomeIcon icon={faTimes}/>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    }
+
+                                    <tr>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line text-center">
+                                            <strong>សរុប</strong>
+                                        </td>
+                                        <td className="thick-line text-right">{UtilCurrency.RielCurrency(data?.totalAmount)}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     );
 };
