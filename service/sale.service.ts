@@ -11,7 +11,12 @@ const createSale=async (id:any)=>{
     })
     return res.status
 }
+const removeItem=async (id:any)=>{
+    const res=await http.delete("sale/table/item/"+id)
+    return res.status
+}
 export  const saleService={
     getOrderByTable,
-    createSale
+    createSale,
+    removeItem
 }

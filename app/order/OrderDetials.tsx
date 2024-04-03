@@ -5,10 +5,21 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {Noto_Sans_Khmer} from '@next/font/google';
 import {UtilCurrency} from "@/utils/UtilCurency";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {saleService} from "@/service/sale.service";
 
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 
-const OrderDetials = ({data}: any) => {
+const OrderDetials = ({data, mutate}: any) => {
+    const useClient = useQueryClient();
+    const removeItem = useMutation({
+        mutationFn: (id: any) => saleService.removeItem(id),
+        onSuccess: () => {
+           useClient.invalidateQueries({
+               queryKey:["allItems"]
+           })
+        }
+    })
     return (
         <div className={notoSansKhmer.className}>
             {/*  <table className="table table-borderless mb-0">
@@ -97,7 +108,8 @@ const OrderDetials = ({data}: any) => {
                                                 <td>{UtilCurrency.RielCurrency(item.amount)}</td>
                                                 <td>{item.status}</td>
                                                 <td>
-                                                    <button type="button" className="btn btn-danger btn-sm px-3">
+                                                    <button type="button" className="btn btn-danger btn-sm px-3"
+                                                            onClick={() => removeItem.mutate(item.id)}>
                                                         <FontAwesomeIcon icon={faTimes}/>
                                                     </button>
                                                 </td>
