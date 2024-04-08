@@ -2,16 +2,18 @@
 import useFetchAllCategories from "@/libs/hooks/fetch-all-categories";
 import {useMutation} from "@tanstack/react-query";
 import {menuService} from "@/service/menu.service";
-import {ItemCard} from "@/components/card/ItemCard";
+
 import {Noto_Sans_Khmer} from '@next/font/google';
+import ItemCard from "@/components/card/ItemCard";
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
-export const NavBarMenu = () => {
+export const NavBarMenu = ({saleId}:any) => {
     const allCategories = useFetchAllCategories()
 
     const {data, mutate: getMenu, isPending} = useMutation({
         mutationFn: (id: string) => menuService.getMenuSale(id)
     })
-    console.log(data)
+
+
     return <div className={notoSansKhmer.className}>
         <ul className="nav nav-tabs">
             {
@@ -37,7 +39,7 @@ export const NavBarMenu = () => {
                 {
                     data?.data?.map((item: any) => (
                         // eslint-disable-next-line react/jsx-key
-                        <ItemCard data={item}/>
+                      <ItemCard data={item} saleId={saleId}/>
 
                     ))
                 }

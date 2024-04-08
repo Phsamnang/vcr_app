@@ -8,6 +8,7 @@ import {SideBar} from "@/components/sidbar/SideBar";
 import NextAuthProvider from "@/components/layout/provider/NextAuthProvider";
 import Protected from "@/components/protected/Protected";
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import {Toaster} from "react-hot-toast";
 
 const inter = Inter({subsets: ['latin']})
 const poppins = Poppins({
@@ -33,6 +34,7 @@ export default function RootLayout({
         </head>
 
         <body className={poppins.className}>
+        <Toaster position="top-center"/>
         <NextAuthProvider>
             <Provider>
                 <Protected>

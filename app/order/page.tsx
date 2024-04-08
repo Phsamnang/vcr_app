@@ -22,15 +22,12 @@ const Item = () => {
     useEffect(() => {
         useClient.invalidateQueries({queryKey: ['allItems']})
     }, [param]);
-    console.log("value id ",tableId)
+
     const query = useQuery({
         queryFn: () => saleService.getOrderByTable(tableId),
-        queryKey: ['allItems',tableId]
+        queryKey: ['allItems', tableId]
     })
-    console.log(" data all ", query.data)
-    /* useEffect(() => {
 
-     }, [tableId]);*/
     const {mutate: createOrder} = useMutation({
         mutationFn: () => saleService.createSale(tableId),
         onSuccess: () => {
@@ -55,7 +52,7 @@ const Item = () => {
                 </div>
                 <div className="col-sm-7">
                     {tableId == undefined ? "" :
-                        query.data ? <NavBarMenu/> :
+                        query.data ? <NavBarMenu saleId={query.data.saleId}/> :
                             <Button className="align-middle" type="primary"
                                     onClick={() => createOrder()}><UsergroupAddOutlined/>ភ្ញៀវថ្មី</Button>
 
