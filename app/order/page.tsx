@@ -34,6 +34,9 @@ const Item = () => {
             useClient.invalidateQueries({
                 queryKey: ['table']
             });
+            useClient.invalidateQueries({
+                queryKey: ['allItems']
+            });
 
         }
 
