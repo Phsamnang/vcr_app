@@ -9,6 +9,7 @@ import {saleService} from "@/service/sale.service";
 import {Button} from "antd";
 import {UsergroupAddOutlined} from "@ant-design/icons";
 import OrderDetials from "@/app/order/OrderDetials";
+import Invoice from "@/app/order/Invoice";
 
 const Item = () => {
     const {id} = useParams()
@@ -41,16 +42,18 @@ const Item = () => {
         }
 
     })
-    if (isLoading) return <span>សូមរងចាំ...</span>
+    if (isLoading||query.isLoading) return <span>សូមរងចាំ...</span>
     return <>
 
-        <div className="container">
+        <div className="container " >
+            <Invoice data={query.data}/>
             <div className="row">
                 <div className="col-sm-5">
-                    <Table data={data}/>
-                    {
+
+                  {/*  <Table data={data}/>*/}
+                  {/*  {
                         query.data ? <OrderDetials data={query.data}/> : ""
-                    }
+                    }*/}
 
                 </div>
                 <div className="col-sm-7">

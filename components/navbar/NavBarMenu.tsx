@@ -2,15 +2,16 @@
 import useFetchAllCategories from "@/libs/hooks/fetch-all-categories";
 import {useMutation} from "@tanstack/react-query";
 import {menuService} from "@/service/menu.service";
-
-import {Noto_Sans_Khmer} from '@next/font/google';
 import ItemCard from "@/components/card/ItemCard";
+import {Noto_Sans_Khmer} from '@next/font/google';
+
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 export const NavBarMenu = ({saleId}:any) => {
     const allCategories = useFetchAllCategories()
 
     const {data, mutate: getMenu, isPending} = useMutation({
-        mutationFn: (id: string) => menuService.getMenuSale(id)
+        mutationFn: (id: string) => menuService.getMenuSale(id),
+        mutationKey:['menus']
     })
 
 
