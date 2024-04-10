@@ -42,18 +42,18 @@ const Item = () => {
         }
 
     })
-    if (isLoading||query.isLoading) return <span>សូមរងចាំ...</span>
+    if (isLoading || query.isLoading) return <span>សូមរងចាំ...</span>
     return <>
 
-        <div className="container " >
-            <Invoice data={query.data}/>
+        <div className="container ">
+
             <div className="row">
                 <div className="col-sm-5">
 
-                  {/*  <Table data={data}/>*/}
-                  {/*  {
+                    <Table data={data}/>
+                    {
                         query.data ? <OrderDetials data={query.data}/> : ""
-                    }*/}
+                    }
 
                 </div>
                 <div className="col-sm-7">
@@ -75,6 +75,7 @@ const Item = () => {
 
 
         </div>
+
 
     </>
 }

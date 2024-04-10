@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
@@ -7,6 +7,9 @@ import {Noto_Sans_Khmer} from '@next/font/google';
 import {UtilCurrency} from "@/utils/UtilCurency";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {saleService} from "@/service/sale.service";
+import Invoice from "@/app/order/Invoice";
+import {faPrint} from "@fortawesome/free-solid-svg-icons/faPrint";
+import {useReactToPrint} from "react-to-print";
 
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 
@@ -15,11 +18,17 @@ const OrderDetials = ({data, mutate}: any) => {
     const removeItem = useMutation({
         mutationFn: (id: any) => saleService.removeItem(id),
         onSuccess: () => {
-           useClient.invalidateQueries({
-               queryKey:["allItems"]
-           })
+            useClient.invalidateQueries({
+                queryKey: ["allItems"]
+            })
         }
     })
+    const componentRef = useRef(null);
+
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+
+    });
     return (
         <div className={notoSansKhmer.className}>
             {/*  <table className="table table-borderless mb-0">
@@ -127,7 +136,18 @@ const OrderDetials = ({data, mutate}: any) => {
                                         </td>
                                         <td className="thick-line text-right">{UtilCurrency.RielCurrency(data?.totalAmount)}</td>
                                     </tr>
-
+                                    <tr>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td/>
+                                        <td>
+                                            <button className="btn btn-success btn-lg btn-block" onClick={handlePrint}>
+                                                <FontAwesomeIcon icon={faPrint}/>Print
+                                            </button>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -135,6 +155,12 @@ const OrderDetials = ({data, mutate}: any) => {
                     </div>
                 </div>
             </div>
+            <div className="visually-hidden">
+                <div ref={componentRef} >
+                    <Invoice data={data}/>
+                </div>
+            </div>
+
 
         </div>
     );

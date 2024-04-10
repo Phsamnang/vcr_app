@@ -24,7 +24,7 @@ const Invoice = ({data}: any) => {
 
 
     return (
-        <div className={notoSansKhmer.className}>
+        <div className={`${notoSansKhmer.className} ${classes.invoiceContainer}`}>
             <div className="container">
                 <div className="row">
                     <div className="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
@@ -65,6 +65,7 @@ const Invoice = ({data}: any) => {
                                 <tbody>
                                 {
                                     summedItems?.map((i) => (
+                                        // eslint-disable-next-line react/jsx-key
                                         <tr>
                                             <td className="col-md-9">
                                                 <em>{i.item}</em>
@@ -90,7 +91,8 @@ const Invoice = ({data}: any) => {
                                     </td>
                                     <td className="text-center text-danger">
                                         <h4>
-                                            <strong className="text-nowrap">{UtilCurrency.RielCurrency(data.totalAmount)}</strong>
+                                            <strong
+                                                className="text-nowrap">{UtilCurrency.RielCurrency(data.totalAmount)}</strong>
                                         </h4>
                                     </td>
                                 </tr>

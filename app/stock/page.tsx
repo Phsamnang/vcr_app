@@ -1,7 +1,7 @@
 'use client'
 
 import {useEffect, useState} from "react";
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {stockService} from "@/service/stock.service";
 import NavBarProduct from "@/components/navbar/NavBarProduct";
 import {Button} from "react-bootstrap";
@@ -18,6 +18,7 @@ export default function Home() {
     const router = useRouter()
     const params = useSearchParams()
     const date = params.get('date')
+    console.log(date, "date")
 
     useEffect(() => {
         router.push("?date=" + d)
@@ -34,6 +35,12 @@ export default function Home() {
 
         }
     );
+    const {mutate: createImport} = useMutation({
+        mutationFn: async () => await http.post("/import"),
+        onSuccess: () => {
+            useClient.invalidateQueries(['stocks'])
+        }
+    })
     if (isLoading) return <>Loading....</>
     return <>
         <head>
@@ -49,7 +56,10 @@ export default function Home() {
             </div>
             <div className="col-auto">
 
-                <Button disabled={data}>Create Import</Button>
+                <Button style={{
+                    opacity: data ? '0.5' : '1',
+                    cursor: data ? 'not-allowed' : '',
+                }} onClick={() => createImport()} disabled={data}>{data?'Created':'Create New'}</Button>
             </div>
         </section>
 
