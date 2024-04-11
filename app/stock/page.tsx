@@ -2,12 +2,9 @@
 
 import {useEffect, useState} from "react";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {stockService} from "@/service/stock.service";
 import NavBarProduct from "@/components/navbar/NavBarProduct";
 import {Button} from "react-bootstrap";
 import {http} from "@/utils/http";
-
-import {filterSearch} from "@/libs/types/FilterSearchProps";
 import {useRouter, useSearchParams} from "next/navigation";
 
 

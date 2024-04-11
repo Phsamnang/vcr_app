@@ -1,5 +1,5 @@
 'use client'
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
@@ -10,10 +10,8 @@ import {saleService} from "@/service/sale.service";
 import Invoice from "@/app/order/Invoice";
 import {faPrint} from "@fortawesome/free-solid-svg-icons/faPrint";
 import {useReactToPrint} from "react-to-print";
-import InputNumber from 'antd/es/input-number';
 import {Button, Input, Space} from "antd";
 import {SaleStatus} from "@/libs/types/SaleStatus";
-import {log} from "node:util";
 
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 
