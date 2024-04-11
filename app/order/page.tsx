@@ -42,7 +42,7 @@ const Item = () => {
         }
 
     })
-    if (isLoading || query.isLoading) return <span>សូមរងចាំ...</span>
+    if (isLoading) return <span>សូមរងចាំ...</span>
     return <>
 
         <div className="container ">

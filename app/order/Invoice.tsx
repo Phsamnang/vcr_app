@@ -45,21 +45,21 @@ const Invoice = ({data}: any) => {
                                     <em>Date: {UtilFormatDate.formatDate(data.saleDate)}</em>
                                 </p>
                                 <p>
-                                    <em>Receipt #: 34522677W</em>
+                                    <em></em>
                                 </p>
                             </div>
                         </div>
                         <div className="row">
                             <div className="text-center">
-                                <h1>Receipt</h1>
+                                <h1>ភោជនីយដ្ឋាន ស្មោះ</h1>
                             </div>
                             <table className="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Product</th>
-                                    <th>#</th>
-                                    <th className="text-center">Price</th>
-                                    <th className="text-center">Total</th>
+                                    <th>ទំនិញ</th>
+                                    <th>ចំនួន</th>
+                                    <th className="text-center">តម្លៃ</th>
+                                    <th className="text-center">សរុប</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -86,7 +86,7 @@ const Invoice = ({data}: any) => {
                                     <td> &nbsp; </td>
                                     <td className="text-right">
                                         <h4>
-                                            <strong>Total:&nbsp;</strong>
+                                            <strong>សរុប:&nbsp;</strong>
                                         </h4>
                                     </td>
                                     <td className="text-center text-danger">
@@ -96,12 +96,27 @@ const Invoice = ({data}: any) => {
                                         </h4>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td> &nbsp; </td>
+                                    <td> &nbsp; </td>
+                                    <td className="text-right">
+                                       {/* <h4>
+                                            <strong>Total:&nbsp;</strong>
+                                        </h4>*/}
+                                    </td>
+                                    <td className="text-center text-danger">
+                                        <h4>
+                                            <strong
+                                                className="text-nowrap">{UtilCurrency.USDCurrency(data.totalAmount/4000)}</strong>
+                                        </h4>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
-                            <button type="button" className="btn btn-success btn-lg btn-block">
+                       {/*     <button type="button" className="btn btn-success btn-lg btn-block">
                                 Pay Now&nbsp;&nbsp;&nbsp;
                                 <span className="glyphicon glyphicon-chevron-right"/>
-                            </button>
+                            </button>*/}
                         </div>
                     </div>
                 </div>

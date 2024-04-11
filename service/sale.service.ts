@@ -19,9 +19,19 @@ const createOrder = async (obj: any) => {
     const res = await http.post("/order", obj);
     return res.status
 }
+const payment = async (id: any,money:number) => {
+    const res = await http.put(`/sale/${id}?money=`+money);
+    return res.status
+}
+const finishOrder = async (name:any) => {
+    const res = await http.patch(`/table/${name}`);
+    return res.status
+}
 export const saleService = {
     getOrderByTable,
     createSale,
     removeItem,
-    createOrder
+    createOrder,
+    payment,
+    finishOrder
 }

@@ -10,17 +10,48 @@ import {saleService} from "@/service/sale.service";
 import Invoice from "@/app/order/Invoice";
 import {faPrint} from "@fortawesome/free-solid-svg-icons/faPrint";
 import {useReactToPrint} from "react-to-print";
+import InputNumber from 'antd/es/input-number';
+import {Button, Input, Space} from "antd";
+import {SaleStatus} from "@/libs/types/SaleStatus";
+import {log} from "node:util";
 
 const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 
 const OrderDetials = ({data, mutate}: any) => {
+    // console.log(data)
     const useClient = useQueryClient();
+    const [amount, setAmount] = useState(0)
     const removeItem = useMutation({
         mutationFn: (id: any) => saleService.removeItem(id),
         onSuccess: () => {
             useClient.invalidateQueries({
                 queryKey: ["allItems"]
             })
+        }
+    })
+    const {mutate: payment} = useMutation({
+        mutationFn: () => saleService.payment(data.saleId, amount),
+        onSuccess: () => {
+            useClient.invalidateQueries({
+                queryKey: ["allItems"]
+            })
+        },
+        onError: (e) => {
+            console.log(e)
+        }
+    })
+    const {mutate: finishOrder} = useMutation({
+        mutationFn: () => saleService.finishOrder(data.tableName),
+        onSuccess: () => {
+            useClient.invalidateQueries({
+                queryKey: ["allItems"]
+            })
+            useClient.invalidateQueries({
+                queryKey: ["table"]
+            })
+        },
+        onError: (e) => {
+            console.log(e)
         }
     })
     const componentRef = useRef(null);
@@ -93,8 +124,8 @@ const OrderDetials = ({data, mutate}: any) => {
                             </h5>
                         </div>
                         <div className="panel-body">
-                            <div className="table-responsive">
-                                <table className="table table-condensed">
+                            <div className="table-responsive">{
+                                data.orders.length != 0 ? <table className="table table-condensed">
                                     <thead>
                                     <tr>
                                         < th scope="col">ឈ្មោះ</th>
@@ -111,10 +142,10 @@ const OrderDetials = ({data, mutate}: any) => {
                                         data?.orders.map((item: any) => (
                                             // eslint-disable-next-line react/jsx-key
                                             <tr>
-                                                <td>{item.item}</td>
-                                                <td>{UtilCurrency.RielCurrency(item.price)}</td>
+                                                <td className="text-nowrap">{item.item}</td>
+                                                <td className="text-nowrap">{UtilCurrency.RielCurrency(item.price)}</td>
                                                 <td>{item.QTY}</td>
-                                                <td>{UtilCurrency.RielCurrency(item.amount)}</td>
+                                                <td className="text-nowrap">{UtilCurrency.RielCurrency(item.amount)}</td>
                                                 <td>{item.status}</td>
                                                 <td>
                                                     <button type="button" className="btn btn-danger btn-sm px-3"
@@ -134,36 +165,80 @@ const OrderDetials = ({data, mutate}: any) => {
                                         <td className="thick-line text-center">
                                             <strong>សរុប</strong>
                                         </td>
-                                        <td className="thick-line text-right">{UtilCurrency.RielCurrency(data?.totalAmount)}</td>
+                                        <td className="thick-line text-right">
+                                            <Space>
+                                                <Input style={
+                                                    {
+                                                        fontSize: 14,
+                                                        fontWeight: "bold"
+                                                    }
+                                                } value={UtilCurrency.RielCurrency(data?.totalAmount)} disabled={true}/>
+                                                <Button
+                                                    type="primary" style={{
+                                                    backgroundColor: "#24AF5D"
+                                                }}
+                                                    onClick={handlePrint}
+                                                >
+                                                    <FontAwesomeIcon icon={faPrint}/>ព្រីន
+                                                </Button>
+
+                                            </Space>
+
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td/>
-                                        <td/>
-                                        <td/>
-                                        <td/>
-                                        <td/>
-                                        <td>
-                                            <button className="btn btn-success btn-lg btn-block" onClick={handlePrint}>
-                                                <FontAwesomeIcon icon={faPrint}/>Print
-                                            </button>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line"/>
+                                        <td className="thick-line text-center">
+                                            <strong>{data.status == SaleStatus.PAID ? " " : "ទទួល"}</strong>
+                                        </td>
+                                        <td className="thick-line text-right text-nowrap">
+                                            {
+                                                data.status == SaleStatus.PAID ? <Button
+                                                        type="primary"
+                                                        onClick={() => {
+                                                            finishOrder()
+                                                        }}
+                                                    >
+                                                        បញ្ចប់ការកម្មង
+                                                    </Button> :
+                                                    <Space>
+                                                        <Input onChange={(e) => setAmount(e.target.value)}/>
+                                                        <Button
+                                                            type="primary"
+                                                            onClick={() => payment()}
+                                                        >
+                                                            ទូទាត់
+                                                        </Button>
+                                                    </Space>
+
+
+                                            }
+
+
                                         </td>
                                     </tr>
                                     </tbody>
-                                </table>
+                                </table> : <span className="text-danger">មិនទាន់មានការកម្មង</span>
+                            }
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="visually-hidden">
-                <div ref={componentRef} >
+                <div ref={componentRef}>
                     <Invoice data={data}/>
                 </div>
             </div>
 
 
         </div>
-    );
+    )
+        ;
 };
 
 export default OrderDetials;
