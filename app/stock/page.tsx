@@ -6,6 +6,9 @@ import NavBarProduct from "@/components/navbar/NavBarProduct";
 import {Button} from "react-bootstrap";
 import {http} from "@/utils/http";
 import {useRouter, useSearchParams} from "next/navigation";
+import FormAddStock from "@/app/stock/FormAddStock";
+import TableDetails from "@/app/stock/TableDetails";
+import useFetchCategoryId from "@/libs/hooks/fetch-category-id";
 
 
 export default function Home() {
@@ -15,7 +18,7 @@ export default function Home() {
     const router = useRouter()
     const params = useSearchParams()
     const date = params.get('date')
-    console.log(date, "date")
+
 
     useEffect(() => {
         router.push("?date=" + d)
@@ -32,12 +35,14 @@ export default function Home() {
 
         }
     );
+
     const {mutate: createImport} = useMutation({
         mutationFn: async () => await http.post("/import"),
         onSuccess: () => {
             useClient.invalidateQueries(['stocks'])
         }
     })
+
     if (isLoading) return <>Loading....</>
     return <>
         <head>
@@ -52,12 +57,24 @@ export default function Home() {
                        type="date"/>
             </div>
             <div className="col-auto">
-
                 <Button style={{
                     opacity: data ? '0.5' : '1',
                     cursor: data ? 'not-allowed' : '',
-                }} onClick={() => createImport()} disabled={data}>{data?'Created':'Create New'}</Button>
+                }} onClick={() => createImport()} disabled={data}>{data ? 'Created' : 'Create New'}</Button>
             </div>
+            <div className="row mt-2">
+                <div className="col-sm-4">
+                    {
+                        data ? <FormAddStock imp={data}/> : ""
+                    }
+                </div>
+                <div className="col-sm-8">
+                    {
+                        data?<TableDetails data={data?.importDetails}/>:""
+                    }
+                </div>
+            </div>
+
         </section>
 
     </>
