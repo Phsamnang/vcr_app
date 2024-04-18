@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import {Button, CardActionArea, CardActions} from '@mui/material';
 import {Input} from "antd";
 import {UtilCurrency} from "@/utils/UtilCurency";
+import {useSearchParams} from "next/navigation";
 
 const ItemCard = ({data, saleId}: any) => {
     const useClient = useQueryClient();
@@ -30,14 +31,20 @@ const ItemCard = ({data, saleId}: any) => {
         }
 
     })
-
+    const param = useSearchParams();
+    const tableId = param.get("table")
+   // console.log("table id ",tableId)
     function handleOrder(menuId: any) {
         const obj = {
             'saleId': saleId,
             'menuId': menuId,
-            'qty': qty
+            'qty': qty,
+            'tableId':tableId
         }
         order(obj)
+        useClient.invalidateQueries({
+            queryKey: ['allItems']
+        })
     }
 
 

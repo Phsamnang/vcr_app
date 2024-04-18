@@ -116,11 +116,11 @@ const OrderDetials = ({data, mutate}: any) => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="panel panel-default">
-                        <div className="panel-heading">
+                      {/*  <div className="panel-heading">
                             <h5 className="panel-title">
                                 <strong>តុ {data?.tableName}</strong>
                             </h5>
-                        </div>
+                        </div>*/}
                         <div className="panel-body">
                             <div className="table-responsive">{
                                 data.orders.length != 0 ? <table className="table table-condensed">

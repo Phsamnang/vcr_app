@@ -20,6 +20,10 @@ const Item = () => {
         queryFn: () => tableService.getTable(),
         queryKey: ['table']
     })
+    const table = useQuery({
+        queryFn: () => tableService.getTableId(tableId),
+        queryKey: ['tableId', tableId]
+    })
     useEffect(() => {
         useClient.invalidateQueries({queryKey: ['allItems']})
     }, [param]);
@@ -33,6 +37,9 @@ const Item = () => {
         mutationFn: () => saleService.createSale(tableId),
         onSuccess: () => {
             useClient.invalidateQueries({
+                queryKey: ['tableId']
+            });
+            useClient.invalidateQueries({
                 queryKey: ['table']
             });
             useClient.invalidateQueries({
@@ -43,6 +50,7 @@ const Item = () => {
 
     })
     if (isLoading) return <span>សូមរងចាំ...</span>
+
     return <>
 
         <div className="container ">
@@ -52,13 +60,20 @@ const Item = () => {
 
                     <Table data={data}/>
                     {
-                        query.data ? <OrderDetials data={query.data}/> : ""
+                        query.data ? <div>
+                                <h5 className="panel-title">
+                                    <strong>តុ {table?.data?.name} </strong>
+                                </h5>
+                                <OrderDetials data={query.data}/>
+                            </div>
+                            : ""
                     }
+
 
                 </div>
                 <div className="col-sm-7">
-                    {tableId == undefined ? "" :
-                        query.data ? <NavBarMenu saleId={query.data.saleId}/> :
+                    {
+                        table?.data?.status == 'unavailable' ? <NavBarMenu saleId={query?.data?.saleId}/> :
                             <Button className="align-middle" type="primary"
                                     onClick={() => createOrder()}><UsergroupAddOutlined/>ភ្ញៀវថ្មី</Button>
 
