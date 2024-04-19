@@ -24,9 +24,12 @@ const ItemCard = ({data, saleId}: any) => {
             useClient.invalidateQueries({
                 queryKey: ['menus']
             })
+            useClient.invalidateQueries({
+                queryKey: ['table']
+            })
         },
-        onError: error => {
-            toast.error(error?.response.data.status.message)
+        onError: (error:any) => {
+            toast.error(error?.response?.data.status.message)
             //  console.log()
         }
 
@@ -51,22 +54,27 @@ const ItemCard = ({data, saleId}: any) => {
     return (
         <div>
             <Card sx={{maxWidth: 400, height: 300}}>
-                <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        height="100"
-                        image={data.image}
-                        alt="....."
-                        sx={{
-                            img: {
-                                objectFit: 'cover',
-                                width: '100%',
-                                height: '100%'
-                            }
-                        }}
-                    />
+                {data.image&&
+                    <CardActionArea>
 
-                </CardActionArea>
+                        <CardMedia
+                            component="img"
+                            height="100"
+                            image={data.image}
+                            alt="....."
+                            sx={{
+                                img: {
+                                    objectFit: 'cover',
+                                    width: '100%',
+                                    height: '100%'
+                                }
+                            }}
+                        />
+
+                    </CardActionArea>
+
+                }
+
                 <CardContent sx={{alignItems: 'center', justifyContent: 'center'}}>
                     <Typography gutterBottom variant="h6" component="div">
                         {data.name}
@@ -79,7 +87,9 @@ const ItemCard = ({data, saleId}: any) => {
                         height: "45px",
                         margin: '0 auto',
                         textAlign: 'center'
-                    }} className="m-2" value={qty} onChange={(e) => setQty(e.target.value)}/>
+                    }} className="m-2" value={qty} onChange={(e:any) => {
+                        setQty(e.target.value);
+                    }}/>
                     <CardActions>
                         <Button size="small" color="primary" onClick={() => handleOrder(data.id)}>
                             កម្មង

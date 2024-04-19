@@ -18,7 +18,7 @@ const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 const OrderDetials = ({data, mutate}: any) => {
     // console.log(data)
     const useClient = useQueryClient();
-    const [amount, setAmount] = useState(0)
+    const [amount, setAmount]:any = useState(0)
     const removeItem = useMutation({
         mutationFn: (id: any) => saleService.removeItem(id),
         onSuccess: () => {
@@ -116,7 +116,7 @@ const OrderDetials = ({data, mutate}: any) => {
             <div className="row">
                 <div className="col-md-12">
                     <div className="panel panel-default">
-                      {/*  <div className="panel-heading">
+                        {/*  <div className="panel-heading">
                             <h5 className="panel-title">
                                 <strong>តុ {data?.tableName}</strong>
                             </h5>
@@ -131,7 +131,7 @@ const OrderDetials = ({data, mutate}: any) => {
                                         <th scope="col">ចំនួន</th>
                                         <th scope="col">សរុប</th>
                                         <th scope="col">STATUS</th>
-                                        <th scope="col">ACTION</th>
+                                        {/*<th scope="col">ACTION</th>*/}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -144,13 +144,21 @@ const OrderDetials = ({data, mutate}: any) => {
                                                 <td className="text-nowrap">{UtilCurrency.RielCurrency(item.price)}</td>
                                                 <td>{item.QTY}</td>
                                                 <td className="text-nowrap">{UtilCurrency.RielCurrency(item.amount)}</td>
-                                                <td>{item.status}</td>
                                                 <td>
-                                                    <button type="button" className="btn btn-danger btn-sm px-3"
-                                                            onClick={() => removeItem.mutate(item.id)}>
-                                                        <FontAwesomeIcon icon={faTimes}/>
-                                                    </button>
+                                                    <Space>
+
+                                                        <span className="ml-2">{item.status}</span>
+                                                        <button type="button"
+                                                                className="btn btn-danger btn-sm px-3 mr-2"
+                                                                onClick={() => removeItem.mutate(item.id)}>
+                                                            <FontAwesomeIcon icon={faTimes}/>
+                                                        </button>
+
+                                                    </Space>
                                                 </td>
+                                                {/*<td>
+
+                                                </td>*/}
                                             </tr>
                                         ))
                                     }
@@ -159,16 +167,17 @@ const OrderDetials = ({data, mutate}: any) => {
                                         <td className="thick-line"/>
                                         <td className="thick-line"/>
                                         <td className="thick-line"/>
-                                        <td className="thick-line"/>
+                                        {/*<td className="thick-line"/>*/}
                                         <td className="thick-line text-center">
                                             <strong>សរុប</strong>
                                         </td>
                                         <td className="thick-line text-right">
                                             <Space>
-                                                <Input style={
+                                                <Input size="large" style={
                                                     {
                                                         fontSize: 14,
-                                                        fontWeight: "bold"
+                                                        fontWeight: "bold",
+                                                        width: 130
                                                     }
                                                 } value={UtilCurrency.RielCurrency(data?.totalAmount)} disabled={true}/>
                                                 <Button
@@ -188,7 +197,7 @@ const OrderDetials = ({data, mutate}: any) => {
                                         <td className="thick-line"/>
                                         <td className="thick-line"/>
                                         <td className="thick-line"/>
-                                        <td className="thick-line"/>
+                                        {/*<td className="thick-line"/>*/}
                                         <td className="thick-line text-center">
                                             <strong>{data.status == SaleStatus.PAID ? " " : "ទទួល"}</strong>
                                         </td>
