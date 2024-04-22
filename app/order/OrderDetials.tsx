@@ -45,6 +45,9 @@ const OrderDetials = ({data, mutate}: any) => {
                 queryKey: ["allItems"]
             })
             useClient.invalidateQueries({
+                queryKey: ["tableId"]
+            })
+            useClient.invalidateQueries({
                 queryKey: ["table"]
             })
         },

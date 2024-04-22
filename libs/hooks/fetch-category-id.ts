@@ -4,7 +4,7 @@ import {categoryService} from "@/service/category.service";
 
 const useFetchCategoryId= (id: string | string[])=>{
     const query=useQuery({
-        queryKey: ['category'],
+        queryKey: ['category',id],
         queryFn:()=>categoryService.getCategoryById(id)
     })
     return {

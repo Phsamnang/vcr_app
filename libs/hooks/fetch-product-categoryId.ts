@@ -1,10 +1,13 @@
 import {useQuery} from "@tanstack/react-query";
 import {productService} from "@/service/product.service";
 
-const useFetchProducts = () => {
+const useFetchProductByCategoryId = (id:any|null) => {
+    if (id==null){
+        id=1
+    }
     const query = useQuery({
-        queryKey: ['products'],
-        queryFn: productService.getAllProducts
+        queryKey: ['product',id],
+        queryFn:()=> productService.getProductByCategoryId(id)
     })
 
     return {
@@ -15,5 +18,4 @@ const useFetchProducts = () => {
     }
 
 }
-
-export default useFetchProducts
+export default useFetchProductByCategoryId

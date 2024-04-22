@@ -14,6 +14,10 @@ const getAllProducts=async ()=>{
     const res=await http.get(ServiceId.PRODUCTS);
     return res.data.data;
 }
+const getProductByCategoryId=async (id:any|null)=>{
+    const res=await http.get('product/'+id);
+    return res.data.data;
+}
 
 const addPrice  =async(requestBody:any)=>{
     const res=await http.put(ServiceId.PRICE,requestBody);
@@ -22,5 +26,6 @@ const addPrice  =async(requestBody:any)=>{
 export const productService={
     createProduct,
     getAllProducts,
-    addPrice
+    addPrice,
+    getProductByCategoryId
 }
