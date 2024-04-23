@@ -14,6 +14,10 @@ const getMenu=async (param: string | null)=>{
     const res=await http.get(ServiceId.MENU+`?cate_id=`+param)
     return res.data.data
 }
+const isCooking=async (id:any)=>{
+    const res=await http.patch(ServiceId.MENU+`/${id}`)
+    return res.status
+}
 const getMenuSale=async (param: string | null)=>{
     const res=await http.get(ServiceId.MENU_SALE+`?cate_id=`+param)
     return res.data
@@ -21,5 +25,6 @@ const getMenuSale=async (param: string | null)=>{
 export  const menuService={
     createMenu,
     getMenu,
-    getMenuSale
+    getMenuSale,
+    isCooking
 }
