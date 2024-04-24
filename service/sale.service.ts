@@ -5,6 +5,10 @@ const getOrderByTable = async (id: any) => {
     const res = await http.get("/sale/table/" + id)
     return res.data.data;
 }
+const getFoodsOrder = async () => {
+    const res = await http.get("/sale/chef")
+    return res.data.data;
+}
 const createSale = async (id: any) => {
     const res = await http.post("/sale", {
         "tableId": id
@@ -33,5 +37,6 @@ export const saleService = {
     removeItem,
     createOrder,
     payment,
-    finishOrder
+    finishOrder,
+    getFoodsOrder
 }

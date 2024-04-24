@@ -1,4 +1,6 @@
 export enum SaleStatus{
    UNPAID='unpaid',
-   PAID='paid'
+   PAID='paid',
+   WAIT='wait',
+   COOKING='cooking'
 }

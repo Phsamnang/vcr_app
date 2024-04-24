@@ -70,7 +70,7 @@ export default function Home() {
                 </div>
                 <div className="col-sm-8">
                     {
-                        data?<TableDetails data={data?.importDetails}/>:""
+                        data ? <TableDetails data={data?.importDetails}/> : ""
                     }
                 </div>
             </div>

@@ -4,7 +4,6 @@ import {Product} from "@/libs/types/Product";
 import TableComponent from "@/components/table/TableComponent";
 
 const TableDetails = ({data}: any) => {
-    console.log(data,"sdkshdskjncks")
     const columns: ColumnDef<Product>[] = [
 
         {
