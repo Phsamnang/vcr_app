@@ -2,6 +2,8 @@
 import Link from "next/link";
 import {ReactNode} from "react";
 import {signOut, useSession} from "next-auth/react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faKitchenSet} from "@fortawesome/free-solid-svg-icons";
 
 export const SideBar = () => {
     const {data: session} = useSession();
@@ -68,7 +70,18 @@ export const SideBar = () => {
                         >
                             <i className="bi-people fs-1"/>
                         </Link>
-                    </li>
+                    </li><li>
+                    <Link
+                        href="/employee"
+                        className="nav-link py-3 px-2"
+                        title=""
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="right"
+                        data-bs-original-title="Customers"
+                    >
+                        <FontAwesomeIcon icon={faKitchenSet} scale={20} style={{ fontSize: '30px' }}/>
+                    </Link>
+                </li>
                     <li>
                         <a
                             onClick={()=>signOut()}

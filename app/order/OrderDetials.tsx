@@ -18,7 +18,7 @@ const notoSansKhmer = Noto_Sans_Khmer({subsets: ['khmer']});
 const OrderDetials = ({data, mutate}: any) => {
     // console.log(data)
     const useClient = useQueryClient();
-    const [amount, setAmount]:any = useState(0)
+    const [amount, setAmount]: any = useState(0)
     const removeItem = useMutation({
         mutationFn: (id: any) => saleService.removeItem(id),
         onSuccess: () => {
@@ -206,7 +206,7 @@ const OrderDetials = ({data, mutate}: any) => {
                                         </td>
                                         <td className="thick-line text-right text-nowrap">
                                             {
-                                                data.status == SaleStatus.PAID ? <Button
+                                                data.status == SaleStatus.PAID || data.totalAmount == null ? <Button
                                                         type="primary"
                                                         onClick={() => {
                                                             finishOrder()
@@ -231,7 +231,19 @@ const OrderDetials = ({data, mutate}: any) => {
                                         </td>
                                     </tr>
                                     </tbody>
-                                </table> : <span className="text-danger">មិនទាន់មានការកម្មង</span>
+                                </table> : <div>
+                                    <Space>
+                                        <span className="text-danger">មិនទាន់មានការកម្មង</span>
+                                        <Button
+                                            type="primary"
+                                            onClick={() => {
+                                                finishOrder()
+                                            }}
+                                        >
+                                            បញ្ចប់ការកម្មង
+                                        </Button>
+                                    </Space>
+                                </div>
                             }
 
                             </div>
